@@ -75,8 +75,8 @@
   })();
 
   // Kakao Channel — official 제주지사 (profile _MxkfxiX)
-  // Add uses /friend (same URL Kakao JS SDK addChannel opens without needing an app key).
-  // Official JS plugin Kakao.Channel.createAddChannelButton requires Kakao.init(JS key) — not available here.
+  // Official SDK button: assets/js/kakao-init.js (Kakao.Channel.createAddChannelButton).
+  // Below: mobilebar + chat URL wiring; add-channel header uses SDK with /friend fallback.
   const KAKAO_CHANNEL = 'https://pf.kakao.com/_MxkfxiX';
   const KAKAO_ADD = 'https://pf.kakao.com/_MxkfxiX/friend';
   const KAKAO_CHAT = 'http://pf.kakao.com/_MxkfxiX/chat';
@@ -123,7 +123,7 @@
     if (call && /전화걸기/.test(call.textContent || '')) call.textContent = '☎ 전화';
   }
   document.querySelectorAll('a.kakao.is-pending, a[href$="#kakao-channel"]').forEach(wireKakao);
-  document.querySelectorAll('a.nav-cta-chplus, a.kakao-chplus, a[data-kakao-add]').forEach(wireKakaoAdd);
+  document.querySelectorAll('a.kakao-chplus, a[data-kakao-add]').forEach(wireKakaoAdd);
 
   // Desktop floating phone CTA
   if (!document.querySelector('.float-cta')) {

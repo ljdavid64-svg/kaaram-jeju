@@ -164,16 +164,22 @@ ul,ol{list-style:none}
 }
 .site-header.is-solid .nav .nav-cta-kakao:hover{background:#F5DC00;border-color:#F5DC00}
 
-/* Official Kakao Channel Add (ch+) — friendadd asset + /friend URL */
-.nav-cta-chplus{
+/* Official Kakao Channel Add (ch+) — SDK createAddChannelButton + /friend fallback */
+.nav-cta-chplus,
+[id^="kakao-add-channel"]{
   display:inline-flex;align-items:center;margin-left:4px;padding:0;
   line-height:0;border-radius:6px;background:transparent;border:0;
   box-shadow:0 8px 18px -12px rgba(25,25,25,.28);
 }
-.nav-cta-chplus img{display:block;height:36px;width:auto}
+.nav-cta-chplus img,
+[id^="kakao-add-channel"] img{display:block;height:36px;width:auto}
 .nav .nav-cta-chplus::after{display:none}
-.nav-cta-chplus:hover{opacity:.92}
-.site-header.is-solid .nav .nav-cta-chplus{box-shadow:0 6px 14px -10px rgba(25,25,25,.22)}
+.nav-cta-chplus:hover,
+[id^="kakao-add-channel"]:hover{opacity:.92}
+.site-header.is-solid .nav .nav-cta-chplus,
+.site-header.is-solid .nav [id^="kakao-add-channel"]{box-shadow:0 6px 14px -10px rgba(25,25,25,.22)}
+.kakao-channel__actions [id^="kakao-add-channel"] img,
+.kakao-chplus img{height:45px}
 
 .nav-cta{box-shadow:0 8px 22px -14px rgba(43,127,140,.45)}
 .site-header.is-solid .nav-cta{box-shadow:0 8px 20px -14px rgba(14,39,79,.28)}
