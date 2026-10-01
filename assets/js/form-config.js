@@ -7,7 +7,7 @@
 window.KAARAM_FORM = Object.assign({}, window.KAARAM_FORM, {
   provider: 'web3forms',
   endpoint: 'https://api.web3forms.com/submit',
-  accessKey: '', // ← paste ACCESS_KEY here after email verification
+  accessKey: '6a318262-7e3a-42d7-bef6-aed4a5b60c6b', // ← paste ACCESS_KEY here after email verification
   toEmail: 'kaaram21@kapaland.co.kr',
   fromName: '가람감정평가법인 제주지사 웹문의'
 });
