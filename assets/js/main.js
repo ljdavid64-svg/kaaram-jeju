@@ -215,10 +215,10 @@
       if (!phone || phone.replace(/\D/g, '').length < 9) { mark(fields.phone, true); bad = true; }
       if (!purpose) { mark(fields.purpose, true); bad = true; }
       if (!message || message.length < 5) { mark(fields.message, true); bad = true; }
-      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { mark(fields.email, true); bad = true; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { mark(fields.email, true); bad = true; }
 
       if (bad) {
-        showError('필수 항목을 확인해 주세요. (이름·연락처·상담목적·메시지)');
+        showError('필수 항목을 확인해 주세요. (이름·연락처·이메일·상담목적·메시지)');
         const firstBad = form.querySelector('.is-invalid');
         firstBad && firstBad.focus();
         return;
@@ -239,13 +239,13 @@
         from_name: cfg.fromName || '가람감정평가법인 제주지사 웹문의',
         name: name,
         phone: phone,
-        email: email || undefined,
+        email: email,
         purpose: purpose,
         place: place || '(미기재)',
         message: message,
         botcheck: false,
       };
-      if (email) payload.replyto = email;
+      payload.replyto = email;
 
       setBusy(true);
       try {
