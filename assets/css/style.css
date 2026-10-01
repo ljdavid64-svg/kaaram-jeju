@@ -141,16 +141,6 @@ ul,ol{list-style:none}
 .nav a:hover,.nav a.is-active{color:#fff}
 .nav a:hover::after,.nav a.is-active::after{width:100%}
 .nav-cta{margin-left:4px}
-.nav-cta-phone{
-  margin-left:2px;padding:10px 14px;font-size:13.5px;border-radius:6px;
-  border-color:rgba(255,255,255,.28);color:#fff;background:transparent;
-}
-.site-header.is-solid .nav-cta-phone{
-  border-color:var(--line);color:var(--navy);
-}
-.site-header.is-solid .nav-cta-phone:hover{
-  border-color:var(--teal);color:var(--teal);background:transparent;
-}
 .nav-cta-kakao{
   margin-left:2px;padding:10px 14px;font-size:13.5px;border-radius:6px;
   background:#FEE500;color:#191919;border-color:#FEE500;
@@ -164,22 +154,6 @@ ul,ol{list-style:none}
 }
 .site-header.is-solid .nav .nav-cta-kakao:hover{background:#F5DC00;border-color:#F5DC00}
 
-/* Official Kakao Channel Add (ch+) — SDK createAddChannelButton + /friend fallback */
-.nav-cta-chplus,
-[id^="kakao-add-channel"]{
-  display:inline-flex;align-items:center;margin-left:4px;padding:0;
-  line-height:0;border-radius:6px;background:transparent;border:0;
-  box-shadow:0 8px 18px -12px rgba(25,25,25,.28);
-}
-.nav-cta-chplus img,
-[id^="kakao-add-channel"] img{display:block;height:36px;width:auto}
-.nav .nav-cta-chplus::after{display:none}
-.nav-cta-chplus:hover,
-[id^="kakao-add-channel"]:hover{opacity:.92}
-.site-header.is-solid .nav .nav-cta-chplus,
-.site-header.is-solid .nav [id^="kakao-add-channel"]{box-shadow:0 6px 14px -10px rgba(25,25,25,.22)}
-.kakao-channel__actions [id^="kakao-add-channel"] img,
-.kakao-chplus img{height:45px}
 
 .nav-cta{box-shadow:0 8px 22px -14px rgba(43,127,140,.45)}
 .site-header.is-solid .nav-cta{box-shadow:0 8px 20px -14px rgba(14,39,79,.28)}
@@ -523,10 +497,6 @@ body.menu-open{overflow:hidden}
   display:flex;align-items:center;justify-content:center;gap:4px;
 }
 .mobilebar a.call{border-right:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
-.mobilebar a.chplus{
-  background:#FEE500;color:#191919;font-weight:800;letter-spacing:.02em;
-}
-.mobilebar a.chplus:hover{background:#F5DC00;color:#191919}
 .mobilebar a.kakao{
   border-right:1px solid rgba(255,255,255,.1);
   background:#3A2E1A;color:#F5E6B8;

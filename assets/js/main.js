@@ -74,11 +74,7 @@
     return 'contact.html';
   })();
 
-  // Kakao Channel — official 제주지사 (profile _MxkfxiX)
-  // Official SDK button: assets/js/kakao-init.js (Kakao.Channel.createAddChannelButton).
-  // Below: mobilebar + chat URL wiring; add-channel header uses SDK with /friend fallback.
-  const KAKAO_CHANNEL = 'https://pf.kakao.com/_MxkfxiX';
-  const KAKAO_ADD = 'https://pf.kakao.com/_MxkfxiX/friend';
+  // Kakao Channel chat CTA — official 제주지사 (profile _MxkfxiX)
   const KAKAO_CHAT = 'http://pf.kakao.com/_MxkfxiX/chat';
   const wireKakao = (el) => {
     if (!el) return;
@@ -89,26 +85,8 @@
     el.title = '카카오톡 채널 상담';
     if (!el.textContent.trim()) el.textContent = '카카오';
   };
-  const wireKakaoAdd = (el) => {
-    if (!el) return;
-    el.href = KAKAO_ADD;
-    el.target = '_blank';
-    el.rel = 'noopener';
-    if (!el.title) el.title = '카카오톡 채널 추가';
-  };
   const bar = document.querySelector('.mobilebar');
   if (bar) {
-    let chplus = bar.querySelector('a.chplus');
-    if (!chplus) {
-      const inq = bar.querySelector('a.inq');
-      chplus = document.createElement('a');
-      chplus.className = 'chplus';
-      chplus.textContent = '채널추가';
-      chplus.setAttribute('aria-label', '카카오톡 채널 추가');
-      if (inq) bar.insertBefore(chplus, inq);
-      else bar.appendChild(chplus);
-    }
-    wireKakaoAdd(chplus);
     let kakao = bar.querySelector('a.kakao');
     if (!kakao) {
       const inq = bar.querySelector('a.inq');
@@ -123,7 +101,6 @@
     if (call && /전화걸기/.test(call.textContent || '')) call.textContent = '☎ 전화';
   }
   document.querySelectorAll('a.kakao.is-pending, a[href$="#kakao-channel"]').forEach(wireKakao);
-  document.querySelectorAll('a.kakao-chplus, a[data-kakao-add]').forEach(wireKakaoAdd);
 
   // Desktop floating phone CTA
   if (!document.querySelector('.float-cta')) {
