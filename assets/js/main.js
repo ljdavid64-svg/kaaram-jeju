@@ -141,10 +141,13 @@
   }
   window.addEventListener('hashchange', scrollToHashTarget);
 
-  // Inquiry form → mailto with light validation
+  // Inquiry form → Web3Forms (fetch POST). Config: assets/js/form-config.js
   const form = document.getElementById('inquiry-form');
   if (form) {
     const err = document.getElementById('inq-error');
+    const ok = document.getElementById('inq-success');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const cfg = window.KAARAM_FORM || {};
     const fields = {
       name: form.querySelector('#inq-name'),
       phone: form.querySelector('#inq-phone'),
@@ -152,12 +155,21 @@
       purpose: form.querySelector('#inq-purpose'),
       place: form.querySelector('#inq-place'),
       message: form.querySelector('#inq-message'),
+      botcheck: form.querySelector('[name="botcheck"]'),
     };
 
     const showError = (msg) => {
+      if (ok) { ok.hidden = true; ok.textContent = ''; }
       if (!err) return;
       err.hidden = !msg;
       err.textContent = msg || '';
+    };
+
+    const showSuccess = (msg) => {
+      if (err) { err.hidden = true; err.textContent = ''; }
+      if (!ok) return;
+      ok.hidden = !msg;
+      ok.textContent = msg || '';
     };
 
     const mark = (el, bad) => {
@@ -165,10 +177,31 @@
       el.classList.toggle('is-invalid', !!bad);
     };
 
-    form.addEventListener('submit', (e) => {
+    const setBusy = (busy) => {
+      form.classList.toggle('is-submitting', !!busy);
+      if (submitBtn) {
+        submitBtn.disabled = !!busy;
+        if (busy) {
+          submitBtn.dataset.prevLabel = submitBtn.innerHTML;
+          submitBtn.innerHTML = '전송 중…';
+        } else if (submitBtn.dataset.prevLabel) {
+          submitBtn.innerHTML = submitBtn.dataset.prevLabel;
+        }
+      }
+    };
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       Object.values(fields).forEach((el) => mark(el, false));
       showError('');
+      showSuccess('');
+
+      // Honeypot filled → pretend success (bots)
+      if (fields.botcheck && fields.botcheck.checked) {
+        showSuccess('문의가 접수되었습니다. 확인 후 연락드리겠습니다.');
+        form.reset();
+        return;
+      }
 
       const name = (fields.name && fields.name.value || '').trim();
       const phone = (fields.phone && fields.phone.value || '').trim();
@@ -191,24 +224,55 @@
         return;
       }
 
+      const accessKey = (cfg.accessKey || form.getAttribute('data-access-key') || '').trim();
+      const endpoint = (cfg.endpoint || 'https://api.web3forms.com/submit').trim();
+
+      if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
+        showError('문의 전송 설정이 아직 완료되지 않았습니다. 전화(064-757-2333) 또는 카카오톡으로 문의해 주세요.');
+        return;
+      }
+
       const subject = '[가람제주지사 상담문의] ' + purpose + ' / ' + name;
-      const lines = [
-        '이름: ' + name,
-        '연락처: ' + phone,
-        '이메일: ' + (email || '(미기재)'),
-        '상담목적: ' + purpose,
-        '물건지: ' + (place || '(미기재)'),
-        '',
-        '메시지:',
-        message,
-        '',
-        '— 가람감정평가법인 제주지사 웹 문의 양식',
-      ];
-      const mailto =
-        'mailto:kaaram21@kapaland.co.kr' +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(lines.join('\n'));
-      window.location.href = mailto;
+      const payload = {
+        access_key: accessKey,
+        subject: subject,
+        from_name: cfg.fromName || '가람감정평가법인 제주지사 웹문의',
+        name: name,
+        phone: phone,
+        email: email || undefined,
+        purpose: purpose,
+        place: place || '(미기재)',
+        message: message,
+        botcheck: false,
+      };
+      if (email) payload.replyto = email;
+
+      setBusy(true);
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        let data = {};
+        try { data = await res.json(); } catch (_) {}
+        if (res.ok && data.success !== false) {
+          showSuccess('문의가 접수되었습니다. 확인 후 연락드리겠습니다. 급한 건은 064-757-2333으로 전화해 주세요.');
+          form.reset();
+        } else {
+          const apiMsg = (data && data.message) ? String(data.message) : '';
+          showError(apiMsg
+            ? ('전송에 실패했습니다: ' + apiMsg + ' 전화(064-757-2333)로 문의해 주세요.')
+            : '전송에 실패했습니다. 잠시 후 다시 시도하거나 전화(064-757-2333)로 문의해 주세요.');
+        }
+      } catch (errNet) {
+        showError('네트워크 오류로 전송하지 못했습니다. 인터넷 연결을 확인하거나 전화(064-757-2333)로 문의해 주세요.');
+      } finally {
+        setBusy(false);
+      }
     });
   }
 })();

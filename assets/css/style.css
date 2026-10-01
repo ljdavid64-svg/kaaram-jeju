@@ -789,6 +789,11 @@ body.menu-open{overflow:hidden}
 .form-note{font-size:13px;color:var(--muted);line-height:1.65;margin:4px 0 14px}
 .form-error{font-size:13.5px;color:#A33A2C;background:#FBEFEC;border:1px solid #E8C4BD;
   padding:10px 12px;border-radius:6px;margin-bottom:12px}
+.form-success{font-size:13.5px;color:#1B6B4A;background:#E8F6EF;border:1px solid #B7DFC9;
+  padding:10px 12px;border-radius:6px;margin-bottom:12px}
+.inquiry-form.is-submitting{opacity:.85;pointer-events:none}
+.hp-field{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;
+  opacity:0!important;pointer-events:none!important}
 .form-actions{display:flex;flex-wrap:wrap;gap:10px}
 
 .faq-prep-grid{

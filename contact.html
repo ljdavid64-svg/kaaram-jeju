@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-  <link rel="stylesheet" href="assets/css/style.css?v=19">
+  <link rel="stylesheet" href="assets/css/style.css?v=20">
   <title>오시는 길 · 문의 | 가람감정평가법인 제주지사</title>
   <meta name="description" content="가람감정평가법인 제주지사 오시는 길 및 문의. TEL 064-757-2333">
 </head>
@@ -123,7 +123,7 @@
           <div class="reveal">
             <span class="eyebrow">Inquiry</span>
             <h2 class="section-title">상담 문의</h2>
-            <p class="lead" style="margin-top:14px">아래 내용을 남겨 주시면 메일 앱으로 전달됩니다. 급한 건은 <a class="text-link" href="tel:0647572333">064-757-2333</a>으로 연락해 주세요.</p>
+            <p class="lead" style="margin-top:14px">아래 내용을 남겨 주시면 지사 이메일로 바로 전달됩니다. 급한 건은 <a class="text-link" href="tel:0647572333">064-757-2333</a>으로 연락해 주세요.</p>
             <ul class="inquiry-quick">
               <li><b>전화</b> <a href="tel:0647572333">064-757-2333</a></li>
               <li><b>이메일</b> <a href="mailto:kaaram21@kapaland.co.kr">kaaram21@kapaland.co.kr</a></li>
@@ -138,8 +138,9 @@
             </div>
           </div>
           <div class="reveal d1">
-            <form class="inquiry-form" id="inquiry-form" novalidate>
-              <!-- Optional Formspree: action="https://formspree.io/f/YOUR_ID" method="POST" — 백엔드 없을 때 mailto 폴백 사용 -->
+            <form class="inquiry-form" id="inquiry-form" data-web3forms novalidate>
+              <!-- Web3Forms: access key in assets/js/form-config.js — see ops/WEB3FORMS.md -->
+              <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
               <div class="form-row">
                 <label for="inq-name">이름 <span class="req">*</span></label>
                 <input type="text" id="inq-name" name="name" autocomplete="name" required maxlength="80" placeholder="홍길동">
@@ -172,10 +173,11 @@
                 <label for="inq-message">메시지 <span class="req">*</span></label>
                 <textarea id="inq-message" name="message" required maxlength="2000" rows="5" placeholder="평가 목적, 물건 유형, 희망 일정 등을 적어 주세요."></textarea>
               </div>
-              <p class="form-note">제출 시 메일 앱이 열리며, 내용이 <strong>kaaram21@kapaland.co.kr</strong>로 전달됩니다. 개인정보는 상담 목적 외 사용하지 않도록 주의해 주세요.</p>
+              <p class="form-note">제출하시면 내용이 <strong>kaaram21@kapaland.co.kr</strong>로 전달됩니다. 개인정보는 상담 목적 외 사용하지 않습니다.</p>
               <p class="form-error" id="inq-error" hidden role="alert"></p>
+              <p class="form-success" id="inq-success" hidden role="status"></p>
               <div class="form-actions">
-                <button type="submit" class="btn btn--primary">메일로 문의 보내기 <span class="arr">→</span></button>
+                <button type="submit" class="btn btn--primary">문의 보내기 <span class="arr">→</span></button>
                 <a class="btn btn--outline" href="tel:0647572333">전화하기</a>
               </div>
             </form>
@@ -240,6 +242,7 @@
     <a class="kakao" href="http://pf.kakao.com/_MxkfxiX/chat" target="_blank" rel="noopener" title="카카오톡 채널 상담">카카오톡</a>
     <a class="inq" href="#inquiry">상담 문의 →</a>
   </nav>
-  <script src="assets/js/main.js?v=19"></script>
+  <script src="assets/js/form-config.js?v=20"></script>
+  <script src="assets/js/main.js?v=20"></script>
 </body>
 </html>
