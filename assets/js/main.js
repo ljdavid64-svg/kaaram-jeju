@@ -74,23 +74,33 @@
     return 'contact.html';
   })();
 
-  // Enhance mobilebar: insert Kakao placeholder if missing (do not invent channel URL)
+  // Kakao Channel chat CTA (official 제주지사 channel)
+  const KAKAO_CHAT = 'http://pf.kakao.com/_MxkfxiX/chat';
+  const wireKakao = (el) => {
+    if (!el) return;
+    el.classList.remove('is-pending');
+    el.href = KAKAO_CHAT;
+    el.target = '_blank';
+    el.rel = 'noopener';
+    el.title = '카카오톡 채널 상담';
+    if (!el.textContent.trim()) el.textContent = '카카오';
+  };
   const bar = document.querySelector('.mobilebar');
-  if (bar && !bar.querySelector('.kakao')) {
-    const inq = bar.querySelector('a.inq');
-    const kakao = document.createElement('a');
-    kakao.className = 'kakao is-pending';
-    kakao.href = contactHref + '#kakao-channel';
-    kakao.title = '카카오채널 연결 예정';
-    kakao.textContent = '카카오';
-    // TODO: 카카오채널 URL 확정 시 href를 공식 채널로 교체. 임의 채널 ID 금지
-    if (inq) bar.insertBefore(kakao, inq);
-    else bar.appendChild(kakao);
-  }
   if (bar) {
+    let kakao = bar.querySelector('a.kakao');
+    if (!kakao) {
+      const inq = bar.querySelector('a.inq');
+      kakao = document.createElement('a');
+      kakao.className = 'kakao';
+      kakao.textContent = '카카오';
+      if (inq) bar.insertBefore(kakao, inq);
+      else bar.appendChild(kakao);
+    }
+    wireKakao(kakao);
     const call = bar.querySelector('a.call');
     if (call && /전화걸기/.test(call.textContent || '')) call.textContent = '☎ 전화';
   }
+  document.querySelectorAll('a.kakao.is-pending, a[href$="#kakao-channel"]').forEach(wireKakao);
 
   // Desktop floating phone CTA
   if (!document.querySelector('.float-cta')) {

@@ -497,7 +497,6 @@ body.menu-open{overflow:hidden}
   border-right:1px solid rgba(255,255,255,.1);
   background:#3A2E1A;color:#F5E6B8;
 }
-.mobilebar a.kakao.is-pending{opacity:.92}
 .mobilebar a.inq{background:var(--teal)}
 
 /* ---------- reveal ---------- */
@@ -696,7 +695,7 @@ body.menu-open{overflow:hidden}
 .hub-lead{max-width:42em;margin-bottom:8px}
 
 
-/* ---------- contact v12: directions, form, kakao, float CTA ---------- */
+/* ---------- contact v13: directions, form, kakao, float CTA ---------- */
 .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .btn--sm{padding:9px 14px;font-size:13px;border-radius:6px}
 .dir-box{
@@ -732,18 +731,23 @@ body.menu-open{overflow:hidden}
 .text-link{color:var(--teal);font-weight:700}
 .text-link:hover{text-decoration:underline}
 
-.kakao-pending{
+.kakao-channel{
   margin-top:20px;padding:16px 18px;border-radius:var(--radius);
   background:linear-gradient(135deg,#FFF8E8,#F7F0DE);
   border:1px solid #E8D9A8;
 }
-.kakao-pending__badge{
+.kakao-channel__badge{
   display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;
   font-size:11.5px;font-weight:700;letter-spacing:.04em;
   color:#6B5318;background:#F0E2B0;margin-bottom:8px;
 }
-.kakao-pending p{font-size:14px;color:#5C4E2A;line-height:1.7;margin:0}
-.kakao-pending strong{color:#3D3214}
+.kakao-channel p{font-size:14px;color:#5C4E2A;line-height:1.7;margin:0 0 12px}
+.kakao-channel strong{color:#3D3214}
+.btn--kakao{
+  background:#FEE500;color:#191919;border:1px solid #E6CF00;
+  font-weight:700;
+}
+.btn--kakao:hover{background:#F5DC00;color:#191919}
 
 .inquiry-form{
   background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
