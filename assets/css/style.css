@@ -164,6 +164,17 @@ ul,ol{list-style:none}
 }
 .site-header.is-solid .nav .nav-cta-kakao:hover{background:#F5DC00;border-color:#F5DC00}
 
+/* Official Kakao Channel Add (ch+) — friendadd asset + /friend URL */
+.nav-cta-chplus{
+  display:inline-flex;align-items:center;margin-left:4px;padding:0;
+  line-height:0;border-radius:6px;background:transparent;border:0;
+  box-shadow:0 8px 18px -12px rgba(25,25,25,.28);
+}
+.nav-cta-chplus img{display:block;height:36px;width:auto}
+.nav .nav-cta-chplus::after{display:none}
+.nav-cta-chplus:hover{opacity:.92}
+.site-header.is-solid .nav .nav-cta-chplus{box-shadow:0 6px 14px -10px rgba(25,25,25,.22)}
+
 .nav-cta{box-shadow:0 8px 22px -14px rgba(43,127,140,.45)}
 .site-header.is-solid .nav-cta{box-shadow:0 8px 20px -14px rgba(14,39,79,.28)}
 
@@ -506,6 +517,10 @@ body.menu-open{overflow:hidden}
   display:flex;align-items:center;justify-content:center;gap:4px;
 }
 .mobilebar a.call{border-right:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+.mobilebar a.chplus{
+  background:#FEE500;color:#191919;font-weight:800;letter-spacing:.02em;
+}
+.mobilebar a.chplus:hover{background:#F5DC00;color:#191919}
 .mobilebar a.kakao{
   border-right:1px solid rgba(255,255,255,.1);
   background:#3A2E1A;color:#F5E6B8;
@@ -756,6 +771,15 @@ body.menu-open{overflow:hidden}
 }
 .kakao-channel p{font-size:14px;color:#5C4E2A;line-height:1.7;margin:0 0 12px}
 .kakao-channel strong{color:#3D3214}
+.kakao-channel__actions{
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+}
+.kakao-chplus{
+  display:inline-flex;align-items:center;line-height:0;
+  border-radius:6px;
+}
+.kakao-chplus img{display:block;height:45px;width:auto}
+.kakao-chplus:hover{opacity:.92}
 .btn--kakao{
   background:#FEE500;color:#191919;border:1px solid #E6CF00;
   font-weight:700;
