@@ -43,7 +43,7 @@
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 12px)}
 body{
   font-family:var(--sans);color:var(--text);background:var(--cream);
   line-height:1.75;font-weight:400;letter-spacing:-.01em;
@@ -111,6 +111,10 @@ ul,ol{list-style:none}
 .btn--outline:hover{border-color:var(--navy);background:var(--navy);color:#fff}
 .btn--red{background:var(--red);color:#fff}
 .btn--red:hover{background:#c43022}
+
+#inquiry, #form, #visit, #kakao-channel {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
 
 /* ---------- header ---------- */
 .site-header{

@@ -112,6 +112,35 @@
     document.body.appendChild(float);
   }
 
+
+  // Hash targets (#inquiry / #form / #visit): account for fixed header; alias #form → #inquiry
+  const scrollToHashTarget = () => {
+    let hash = window.location.hash || '';
+    if (hash === '#form') {
+      const inq = document.getElementById('inquiry');
+      if (inq) {
+        if (history.replaceState) history.replaceState(null, '', '#inquiry');
+        hash = '#inquiry';
+      }
+    }
+    if (!hash || hash.length < 2) return;
+    const id = decodeURIComponent(hash.slice(1));
+    const el = document.getElementById(id);
+    if (!el) return;
+    // Make sure reveal children are visible when jumping
+    el.querySelectorAll('.reveal').forEach((n) => n.classList.add('is-in'));
+    el.classList.add('is-in');
+    const headerH = (header && header.offsetHeight) || 78;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - headerH - 12;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  };
+  if (window.location.hash) {
+    // defer past layout / font load so offset is correct
+    requestAnimationFrame(() => setTimeout(scrollToHashTarget, 50));
+    window.addEventListener('load', scrollToHashTarget, { once: true });
+  }
+  window.addEventListener('hashchange', scrollToHashTarget);
+
   // Inquiry form → mailto with light validation
   const form = document.getElementById('inquiry-form');
   if (form) {
